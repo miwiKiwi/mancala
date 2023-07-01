@@ -1,7 +1,6 @@
 package org.mwie.game.board;
 
 import org.junit.jupiter.api.Test;
-import org.mwie.game.PlayerNumber;
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
 

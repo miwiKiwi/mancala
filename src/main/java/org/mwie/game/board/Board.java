@@ -1,6 +1,5 @@
 package org.mwie.game.board;
 
-import org.mwie.game.PlayerNumber;
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
 
