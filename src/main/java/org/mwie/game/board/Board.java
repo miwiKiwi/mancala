@@ -2,6 +2,8 @@ package org.mwie.game.board;
 
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
+import org.mwie.game.board.player.Player;
+import org.mwie.game.board.player.PlayerNumber;
 
 import java.util.ArrayList;
 import java.util.Arrays;

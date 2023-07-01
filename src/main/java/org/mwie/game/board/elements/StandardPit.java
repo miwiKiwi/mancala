@@ -1,6 +1,6 @@
 package org.mwie.game.board.elements;
 
-import org.mwie.game.board.PlayerNumber;
+import org.mwie.game.board.player.PlayerNumber;
 
 public class StandardPit extends Pit {
 

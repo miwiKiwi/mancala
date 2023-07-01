@@ -1,4 +1,4 @@
-package org.mwie.game.board;
+package org.mwie.game.board.player;
 
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
