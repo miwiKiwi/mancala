@@ -10,6 +10,8 @@ public abstract class Pit {
 
     private Pit next;
 
+    private Pit opposite;
+
     protected Pit(int stones, PlayerNumber owner) {
         this.stones = stones;
         this.owner = owner;
@@ -37,5 +39,13 @@ public abstract class Pit {
 
     public void setNext(Pit next) {
         this.next = next;
+    }
+
+    public Pit getOpposite() {
+        return opposite;
+    }
+
+    public void setOpposite(Pit opposite) {
+        this.opposite = opposite;
     }
 }

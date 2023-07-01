@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.mwie.game.board.elements.Pit;
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
-import org.mwie.game.board.player.Player;
 import org.mwie.game.board.player.PlayerNumber;
 
 import java.util.HashSet;
@@ -14,14 +13,6 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
-
-    @Test
-    void shouldHaveTwoPlayers() {
-        Board board = new Board.BoardBuilder().create(6).build();
-        var players = board.getPlayers().stream().collect(Collectors.groupingBy(Player::playerNumber));
-        assertEquals(1, players.get(PlayerNumber.ONE).size());
-        assertEquals(1, players.get(PlayerNumber.TWO).size());
-    }
 
     @Test
     void shouldHaveSixPitsPerPlayer() {
@@ -54,6 +45,27 @@ class BoardTest {
 
         assertEquals(14, allPits.size());
         assertEquals(storeOne, pit);
-        //TODO: finish test
+    }
+
+    @Test
+    void pitsShouldHaveOpposites() {
+        Board board = new Board.BoardBuilder().create(6).build();
+        var players = board.getPlayers();
+        var pitsOne = players.playerOne().pits();
+        var pitsTwo = players.playerTwo().pits();
+
+        assertEquals(pitsOne.get(0).getOpposite(), pitsTwo.get(5));
+        assertEquals(pitsOne.get(1).getOpposite(), pitsTwo.get(4));
+        assertEquals(pitsOne.get(2).getOpposite(), pitsTwo.get(3));
+        assertEquals(pitsOne.get(3).getOpposite(), pitsTwo.get(2));
+        assertEquals(pitsOne.get(4).getOpposite(), pitsTwo.get(1));
+        assertEquals(pitsOne.get(5).getOpposite(), pitsTwo.get(0));
+
+        assertEquals(pitsTwo.get(0).getOpposite(), pitsOne.get(5));
+        assertEquals(pitsTwo.get(1).getOpposite(), pitsOne.get(4));
+        assertEquals(pitsTwo.get(2).getOpposite(), pitsOne.get(3));
+        assertEquals(pitsTwo.get(3).getOpposite(), pitsOne.get(2));
+        assertEquals(pitsTwo.get(4).getOpposite(), pitsOne.get(1));
+        assertEquals(pitsTwo.get(5).getOpposite(), pitsOne.get(0));
     }
 }

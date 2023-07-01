@@ -4,6 +4,7 @@ import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
 import org.mwie.game.board.player.Player;
 import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.board.player.Players;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,7 +15,7 @@ public class Board {
 
     private final List<StandardPit>  pits;
     private final List<Store>  stores;
-    private final List<Player> players;
+    private final Players players;
 
     private Board(BoardBuilder builder) {
         this.pits = builder.pits;
@@ -30,14 +31,14 @@ public class Board {
         return stores;
     }
 
-    public List<Player> getPlayers() {
+    public Players getPlayers() {
         return players;
     }
 
     public static class BoardBuilder {
         private List<StandardPit> pits;
         private List<Store> stores;
-        private List<Player> players;
+        private Players players;
 
         public BoardBuilder create(int numberOfPitsPerPlayer) {
             var pitsOne = buildPitsForPlayer(PlayerNumber.ONE, numberOfPitsPerPlayer);
@@ -51,12 +52,22 @@ public class Board {
             stores.addAll(Arrays.asList(storeOne, storeTwo));
 
             setupPitsCycle(pitsOne, pitsTwo, storeOne, storeTwo);
+            setupOpposites(pitsOne, pitsTwo);
 
-            players = new ArrayList<>();
+
             Player playerOne = new Player(PlayerNumber.ONE, pitsOne, storeOne);
             Player playerTwo = new Player(PlayerNumber.TWO, pitsTwo, storeTwo);
-            players.addAll(Arrays.asList(playerOne, playerTwo));
+            players = new Players(playerOne, playerTwo);
             return this;
+        }
+
+        private void setupOpposites(LinkedList<StandardPit> pitsOne, LinkedList<StandardPit> pitsTwo) {
+            for(int i =0; i< pitsOne.size(); i++) {
+                var one = pitsOne.get(i);
+                var two = pitsTwo.get(pitsTwo.size() - i -1);
+                one.setOpposite(two);
+                two.setOpposite(one);
+            }
         }
 
         private LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int numberOfPitsPerPlayer) {
