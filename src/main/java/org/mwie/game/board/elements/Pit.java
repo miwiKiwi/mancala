@@ -1,4 +1,4 @@
-package org.mwie.game.board;
+package org.mwie.game.board.elements;
 
 public abstract class Pit {
 
