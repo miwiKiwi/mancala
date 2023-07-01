@@ -1,10 +1,8 @@
 package org.mwie.game.board;
 
-public class Player {
+import org.mwie.game.board.elements.StandardPit;
+import org.mwie.game.board.elements.Store;
 
-    private final PlayerNumber playerNumber;
+import java.util.List;
 
-    public Player(PlayerNumber playerNumber) {
-        this.playerNumber = playerNumber;
-    }
-}
+public record Player(PlayerNumber playerNumber, List<StandardPit> pits, Store store) {}

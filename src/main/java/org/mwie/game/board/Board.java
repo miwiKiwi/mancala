@@ -10,14 +10,14 @@ import java.util.List;
 
 public class Board {
 
-    //TODO: board should have two players, 12 standardPits and 2 stores
-
-    private List<StandardPit>  pits;
-    private List<Store>  stores;
+    private final List<StandardPit>  pits;
+    private final List<Store>  stores;
+    private final List<Player> players;
 
     private Board(BoardBuilder builder) {
         this.pits = builder.pits;
         this.stores = builder.stores;
+        this.players = builder.players;
     }
 
     public List<StandardPit> getPits() {
@@ -28,23 +28,30 @@ public class Board {
         return stores;
     }
 
+    public List<Player> getPlayers() {
+        return players;
+    }
+
     public static class BoardBuilder {
         private List<StandardPit> pits;
         private List<Store> stores;
+        private List<Player> players;
 
-        public BoardBuilder withPits(int numberOfPitsPerPlayer) {
+        public BoardBuilder create(int numberOfPitsPerPlayer) {
             var pitsOne = buildPitsForPlayer(PlayerNumber.ONE, numberOfPitsPerPlayer);
             var pitsTwo = buildPitsForPlayer(PlayerNumber.TWO, numberOfPitsPerPlayer);
             pits = new ArrayList<>(pitsOne);
             pits.addAll(pitsTwo);
-            return this;
-        }
 
-        public BoardBuilder withStores() {
             stores = new ArrayList<>();
             var storeOne = new Store(PlayerNumber.ONE);
             var storeTwo = new Store(PlayerNumber.TWO);
             stores.addAll(Arrays.asList(storeOne, storeTwo));
+
+            players = new ArrayList<>();
+            Player playerOne = new Player(PlayerNumber.ONE, pitsOne, storeOne);
+            Player playerTwo = new Player(PlayerNumber.TWO, pitsTwo, storeTwo);
+            players.addAll(Arrays.asList(playerOne, playerTwo));
             return this;
         }
 
