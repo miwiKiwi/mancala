@@ -1,9 +1,11 @@
 package org.mwie.game.board.elements;
 
+import org.mwie.game.PlayerNumber;
+
 public class StandardPit extends Pit {
 
-    public StandardPit() {
-        super(6);
+    public StandardPit(PlayerNumber owner) {
+        super(6, owner);
     }
 
     public int takeStones() {

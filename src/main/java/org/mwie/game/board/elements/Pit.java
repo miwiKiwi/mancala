@@ -1,11 +1,16 @@
 package org.mwie.game.board.elements;
 
+import org.mwie.game.PlayerNumber;
+
 public abstract class Pit {
 
     private int stones;
 
-    protected Pit(int stones) {
+    private final PlayerNumber owner;
+
+    protected Pit(int stones, PlayerNumber owner) {
         this.stones = stones;
+        this.owner = owner;
     }
 
     public int countStones() {
@@ -20,4 +25,7 @@ public abstract class Pit {
         setStones(countStones() + stones);
     }
 
+    public PlayerNumber getOwner() {
+        return owner;
+    }
 }

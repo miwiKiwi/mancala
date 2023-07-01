@@ -1,9 +1,11 @@
 package org.mwie.game.board.elements;
 
+import org.mwie.game.PlayerNumber;
+
 public class Store extends Pit {
 
-    public Store() {
-        super(0);
+    public Store(PlayerNumber owner) {
+        super(0, owner);
     }
 
     public void putStones(int stones) {
