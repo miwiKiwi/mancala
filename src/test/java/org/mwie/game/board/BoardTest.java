@@ -13,6 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class BoardTest {
 
     @Test
+    void shouldHaveTwoPlayers() {
+        Board board = new Board.BoardBuilder().create(6).build();
+        var players = board.getPlayers().stream().collect(Collectors.groupingBy(Player::playerNumber));
+        assertEquals(1, players.get(PlayerNumber.ONE).size());
+        assertEquals(1, players.get(PlayerNumber.TWO).size());
+    }
+
+    @Test
     void shouldHaveSixPitsPerPlayer() {
         Board board = new Board.BoardBuilder().create(6).build();
         var pits = board.getPits().stream().collect(Collectors.groupingBy(StandardPit::getOwner));
@@ -29,10 +37,9 @@ class BoardTest {
     }
 
     @Test
-    void shouldHaveTwoPlayers() {
+    void shouldHavePitsInCircle() {
         Board board = new Board.BoardBuilder().create(6).build();
-        var players = board.getPlayers().stream().collect(Collectors.groupingBy(Player::playerNumber));
-        assertEquals(1, players.get(PlayerNumber.ONE).size());
-        assertEquals(1, players.get(PlayerNumber.TWO).size());
+        var pits = board.getPits().stream().collect(Collectors.groupingBy(StandardPit::getOwner));
+        //TODO: finish test
     }
 }

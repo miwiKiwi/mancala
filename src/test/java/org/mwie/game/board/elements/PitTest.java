@@ -10,14 +10,14 @@ class PitTest {
     @Test
     void shouldStoreStonesInPit() {
         Pit pit = new StandardPit(PlayerNumber.ONE);
-        assertEquals(6, pit.countStones());
+        assertEquals(6, pit.getStones());
     }
 
     @Test
     void shouldBeAbleToTakeStonesFromPit() {
         StandardPit pit = new StandardPit(PlayerNumber.ONE);
         var taken = pit.takeStones();
-        assertEquals(0, pit.countStones());
+        assertEquals(0, pit.getStones());
         assertEquals(6, taken);
     }
 
@@ -25,7 +25,22 @@ class PitTest {
     void shouldBeAbleToSowStoneInPit() {
         StandardPit pit = new StandardPit(PlayerNumber.ONE);
         pit.sow();
-        assertEquals(7, pit.countStones());
+        assertEquals(7, pit.getStones());
+    }
+
+    @Test
+    void shouldHaveNext() {
+        StandardPit one = new StandardPit(PlayerNumber.ONE);
+        Store store = new Store(PlayerNumber.ONE);
+        StandardPit two = new StandardPit(PlayerNumber.ONE);
+
+        one.setNext(store);
+        store.setNext(two);
+        two.setNext(one);
+
+        assertEquals(store, one.next());
+        assertEquals(two, store.next());
+        assertEquals(one, two.next());
     }
 
 }

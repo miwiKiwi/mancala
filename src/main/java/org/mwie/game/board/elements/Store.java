@@ -9,6 +9,6 @@ public class Store extends Pit {
     }
 
     public void putStones(int stones) {
-        setStones(countStones() + stones);
+        setStones(getStones() + stones);
     }
 }

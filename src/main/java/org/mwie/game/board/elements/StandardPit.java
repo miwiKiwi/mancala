@@ -9,7 +9,7 @@ public class StandardPit extends Pit {
     }
 
     public int takeStones() {
-        var result = countStones();
+        var result = getStones();
         setStones(0);
         return result;
     }

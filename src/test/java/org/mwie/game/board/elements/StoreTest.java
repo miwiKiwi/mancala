@@ -10,20 +10,20 @@ class StoreTest {
     @Test
     void shouldInitializeStoreWithNoStones() {
         Store store = new Store(PlayerNumber.ONE);
-        assertEquals(0, store.countStones());
+        assertEquals(0, store.getStones());
     }
 
     @Test
     void shouldAcceptMoreThanOneStone() {
         Store store = new Store(PlayerNumber.ONE);
         store.putStones(5);
-        assertEquals(5, store.countStones());
+        assertEquals(5, store.getStones());
     }
 
     @Test
     void shouldBeAbleToSowManyStones() {
         Store store = new Store(PlayerNumber.ONE);
         store.sow(4);
-        assertEquals(4, store.countStones());
+        assertEquals(4, store.getStones());
     }
 }

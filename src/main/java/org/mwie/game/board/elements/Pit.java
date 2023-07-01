@@ -8,12 +8,14 @@ public abstract class Pit {
 
     private final PlayerNumber owner;
 
+    private Pit next;
+
     protected Pit(int stones, PlayerNumber owner) {
         this.stones = stones;
         this.owner = owner;
     }
 
-    public int countStones() {
+    public int getStones() {
         return stones;
     }
 
@@ -22,10 +24,18 @@ public abstract class Pit {
     }
 
     void sow(int stones) {
-        setStones(countStones() + stones);
+        setStones(getStones() + stones);
     }
 
     public PlayerNumber getOwner() {
         return owner;
+    }
+
+    public Pit next() {
+        return next;
+    }
+
+    public void setNext(Pit next) {
+        this.next = next;
     }
 }
