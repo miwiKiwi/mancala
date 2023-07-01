@@ -1,11 +1,14 @@
 package org.mwie.game.board;
 
 import org.junit.jupiter.api.Test;
+import org.mwie.game.board.elements.Pit;
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
 import org.mwie.game.board.player.Player;
 import org.mwie.game.board.player.PlayerNumber;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -37,9 +40,20 @@ class BoardTest {
     }
 
     @Test
-    void shouldHavePitsInCircle() {
+    void shouldHavePitsInCycle() {
         Board board = new Board.BoardBuilder().create(6).build();
-        var pits = board.getPits().stream().collect(Collectors.groupingBy(StandardPit::getOwner));
+        var storeOne = board.getPits().get(0);
+        Pit pit = storeOne;
+        Set<Pit> allPits = new HashSet<>();
+        allPits.add(pit);
+
+        for (int i=0; i< 14; i++) {
+            pit = pit.next();
+            allPits.add(pit);
+        }
+
+        assertEquals(14, allPits.size());
+        assertEquals(storeOne, pit);
         //TODO: finish test
     }
 }

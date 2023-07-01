@@ -50,6 +50,8 @@ public class Board {
             var storeTwo = new Store(PlayerNumber.TWO);
             stores.addAll(Arrays.asList(storeOne, storeTwo));
 
+            setupPitsCycle(pitsOne, pitsTwo, storeOne, storeTwo);
+
             players = new ArrayList<>();
             Player playerOne = new Player(PlayerNumber.ONE, pitsOne, storeOne);
             Player playerTwo = new Player(PlayerNumber.TWO, pitsTwo, storeTwo);
@@ -59,11 +61,22 @@ public class Board {
 
         private LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int numberOfPitsPerPlayer) {
             LinkedList<StandardPit> playerPits = new LinkedList<>();
-            playerPits.addLast(new StandardPit(playerNumber));
+            var previous = new StandardPit(playerNumber);
             while(playerPits.size() < numberOfPitsPerPlayer) {
-                playerPits.addLast(new StandardPit(playerNumber));
+                var next = new StandardPit(playerNumber);
+                previous.setNext(next);
+                previous = next;
+                playerPits.add(next);
             }
             return playerPits;
+        }
+
+        private void setupPitsCycle(LinkedList<StandardPit> pitsOne, LinkedList<StandardPit> pitsTwo,
+                                    Store storeOne, Store storeTwo) {
+            pitsOne.getLast().setNext(storeOne);
+            storeOne.setNext(pitsTwo.getFirst());
+            pitsTwo.getLast().setNext(storeTwo);
+            storeTwo.setNext(pitsOne.getFirst());
         }
 
         public Board build() {
