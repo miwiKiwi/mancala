@@ -12,12 +12,9 @@ public class ServicesConfiguration {
     }
 
     @Bean
-    public PlayerService playerService(BoardService boardService) {
-        return new PlayerServiceImpl(boardService);
+    public PlayerService playerService() {
+        return new PlayerServiceImpl();
     }
 
-    @Bean
-    public BoardService boardService() {
-        return new BoardServiceimpl();
-    }
+
 }

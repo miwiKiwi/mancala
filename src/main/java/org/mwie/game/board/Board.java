@@ -4,18 +4,22 @@ import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
 import org.mwie.game.player.Player;
 import org.mwie.game.player.PlayerNumber;
-import org.mwie.game.player.Players;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Board {
 
+    public static final PlayerNumber ONE = PlayerNumber.ONE;
+    public static final PlayerNumber TWO = PlayerNumber.TWO;
+
     private final List<StandardPit>  pits;
     private final List<Store>  stores;
-    private final Players players;
+    private final Map<PlayerNumber, Player> players;
 
     private Board(BoardBuilder builder) {
         this.pits = builder.pits;
@@ -31,33 +35,34 @@ public class Board {
         return stores;
     }
 
-    public Players getPlayers() {
+    public Map<PlayerNumber, Player> getPlayers() {
         return players;
     }
 
     public static class BoardBuilder {
         private List<StandardPit> pits;
         private List<Store> stores;
-        private Players players;
+        private Map<PlayerNumber, Player> players;
 
         public BoardBuilder create(int numberOfPitsPerPlayer) {
-            var pitsOne = buildPitsForPlayer(PlayerNumber.ONE, numberOfPitsPerPlayer);
-            var pitsTwo = buildPitsForPlayer(PlayerNumber.TWO, numberOfPitsPerPlayer);
+            var pitsOne = buildPitsForPlayer(ONE, numberOfPitsPerPlayer);
+            var pitsTwo = buildPitsForPlayer(TWO, numberOfPitsPerPlayer);
             pits = new ArrayList<>(pitsOne);
             pits.addAll(pitsTwo);
 
             stores = new ArrayList<>();
-            var storeOne = new Store(PlayerNumber.ONE);
-            var storeTwo = new Store(PlayerNumber.TWO);
+            var storeOne = new Store(ONE);
+            var storeTwo = new Store(TWO);
             stores.addAll(Arrays.asList(storeOne, storeTwo));
 
             setupPitsCycle(pitsOne, pitsTwo, storeOne, storeTwo);
             setupOpposites(pitsOne, pitsTwo);
 
-
-            Player playerOne = new Player(PlayerNumber.ONE, pitsOne, storeOne);
-            Player playerTwo = new Player(PlayerNumber.TWO, pitsTwo, storeTwo);
-            players = new Players(playerOne, playerTwo);
+            players =  new EnumMap<>(PlayerNumber.class);
+            Player playerOne = new Player(ONE, pitsOne, storeOne);
+            Player playerTwo = new Player(TWO, pitsTwo, storeTwo);
+            players.put(ONE, playerOne);
+            players.put(TWO, playerTwo);
             return this;
         }
 

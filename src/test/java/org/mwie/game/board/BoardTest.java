@@ -51,8 +51,8 @@ class BoardTest {
     void pitsShouldHaveOpposites() {
         Board board = new Board.BoardBuilder().create(6).build();
         var players = board.getPlayers();
-        var pitsOne = players.playerOne().pits();
-        var pitsTwo = players.playerTwo().pits();
+        var pitsOne = players.get(PlayerNumber.ONE).pits();
+        var pitsTwo = players.get(PlayerNumber.TWO).pits();
 
         assertEquals(pitsOne.get(0).getOpposite(), pitsTwo.get(5));
         assertEquals(pitsOne.get(1).getOpposite(), pitsTwo.get(4));
