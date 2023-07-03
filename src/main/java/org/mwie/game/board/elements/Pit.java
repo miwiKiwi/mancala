@@ -1,6 +1,6 @@
 package org.mwie.game.board.elements;
 
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 public abstract class Pit {
 
@@ -25,7 +25,7 @@ public abstract class Pit {
         this.stones = stones;
     }
 
-    void sow(int stones) {
+    void add(int stones) {
         setStones(getStones() + stones);
     }
 

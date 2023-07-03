@@ -1,4 +1,4 @@
-package org.mwie.game.board.player;
+package org.mwie.game.player;
 
 public record Players(Player playerOne, Player playerTwo) {
 }

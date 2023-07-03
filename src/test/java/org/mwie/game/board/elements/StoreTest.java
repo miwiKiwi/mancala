@@ -1,7 +1,7 @@
 package org.mwie.game.board.elements;
 
 import org.junit.jupiter.api.Test;
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -23,7 +23,7 @@ class StoreTest {
     @Test
     void shouldBeAbleToSowManyStones() {
         Store store = new Store(PlayerNumber.ONE);
-        store.sow(4);
+        store.add(4);
         assertEquals(4, store.getStones());
     }
 }

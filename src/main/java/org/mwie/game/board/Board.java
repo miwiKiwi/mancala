@@ -2,9 +2,9 @@ package org.mwie.game.board;
 
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
-import org.mwie.game.board.player.Player;
-import org.mwie.game.board.player.PlayerNumber;
-import org.mwie.game.board.player.Players;
+import org.mwie.game.player.Player;
+import org.mwie.game.player.PlayerNumber;
+import org.mwie.game.player.Players;
 
 import java.util.ArrayList;
 import java.util.Arrays;

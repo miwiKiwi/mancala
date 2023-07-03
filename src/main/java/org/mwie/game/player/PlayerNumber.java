@@ -1,4 +1,4 @@
-package org.mwie.game.board.player;
+package org.mwie.game.player;
 
 public enum PlayerNumber {
     ONE, TWO

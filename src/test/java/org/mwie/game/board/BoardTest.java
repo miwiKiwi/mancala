@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.mwie.game.board.elements.Pit;
 import org.mwie.game.board.elements.StandardPit;
 import org.mwie.game.board.elements.Store;
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 import java.util.HashSet;
 import java.util.Set;

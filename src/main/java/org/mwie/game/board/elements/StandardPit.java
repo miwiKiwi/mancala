@@ -1,6 +1,6 @@
 package org.mwie.game.board.elements;
 
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 public class StandardPit extends Pit {
 
@@ -14,7 +14,7 @@ public class StandardPit extends Pit {
         return result;
     }
 
-    public void sow() {
-        super.sow(1);
+    public void putStone() {
+        super.add(1);
     }
 }

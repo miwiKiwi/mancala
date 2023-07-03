@@ -1,6 +1,6 @@
 package org.mwie.game.board.elements;
 
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 public class Store extends Pit {
 

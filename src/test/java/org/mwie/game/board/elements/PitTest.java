@@ -1,7 +1,7 @@
 package org.mwie.game.board.elements;
 
 import org.junit.jupiter.api.Test;
-import org.mwie.game.board.player.PlayerNumber;
+import org.mwie.game.player.PlayerNumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,7 +14,7 @@ class PitTest {
     }
 
     @Test
-    void shouldBeAbleToTakeStonesFromPit() {
+    void shouldBeAbleToTakeAllStonesFromPit() {
         StandardPit pit = new StandardPit(PlayerNumber.ONE);
         var taken = pit.takeStones();
         assertEquals(0, pit.getStones());
@@ -24,7 +24,7 @@ class PitTest {
     @Test
     void shouldBeAbleToSowStoneInPit() {
         StandardPit pit = new StandardPit(PlayerNumber.ONE);
-        pit.sow();
+        pit.putStone();
         assertEquals(7, pit.getStones());
     }
 
