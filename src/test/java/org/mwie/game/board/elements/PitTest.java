@@ -16,7 +16,7 @@ class PitTest {
     @Test
     void shouldBeAbleToTakeAllStonesFromPit() {
         StandardPit pit = new StandardPit(PlayerNumber.ONE);
-        var taken = pit.takeStones();
+        var taken = pit.takeOutStones();
         assertEquals(0, pit.getStones());
         assertEquals(6, taken);
     }

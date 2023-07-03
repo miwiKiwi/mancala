@@ -1,5 +1,6 @@
 package org.mwie.game.board.elements;
 
+import org.mwie.game.player.Player;
 import org.mwie.game.player.PlayerNumber;
 
 public abstract class Pit {
@@ -9,8 +10,6 @@ public abstract class Pit {
     private final PlayerNumber owner;
 
     private Pit next;
-
-    private Pit opposite;
 
     protected Pit(int stones, PlayerNumber owner) {
         this.stones = stones;
@@ -24,6 +23,12 @@ public abstract class Pit {
     protected void setStones(int stones) {
         this.stones = stones;
     }
+
+    public void putStone() {
+        add(1);
+    }
+
+    public abstract boolean canPutStones(Player player);
 
     void add(int stones) {
         setStones(getStones() + stones);
@@ -39,13 +44,5 @@ public abstract class Pit {
 
     public void setNext(Pit next) {
         this.next = next;
-    }
-
-    public Pit getOpposite() {
-        return opposite;
-    }
-
-    public void setOpposite(Pit opposite) {
-        this.opposite = opposite;
     }
 }
