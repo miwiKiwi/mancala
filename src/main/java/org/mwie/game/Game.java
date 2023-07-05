@@ -1,7 +1,8 @@
 package org.mwie.game;
 
-import org.mwie.game.board.Board;
-import org.mwie.game.player.Player;
+import org.mwie.game.model.board.Board;
+import org.mwie.game.model.player.Player;
+import org.mwie.game.model.player.PlayerNumber;
 
 public class Game {
 

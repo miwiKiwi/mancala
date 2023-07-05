@@ -2,8 +2,8 @@ package org.mwie.game.services;
 
 import lombok.RequiredArgsConstructor;
 import org.mwie.game.Game;
-import org.mwie.game.player.Player;
-import org.mwie.game.player.PlayerNumber;
+import org.mwie.game.model.player.Player;
+import org.mwie.game.model.player.PlayerNumber;
 
 @RequiredArgsConstructor
 public class GameServiceImpl implements GameService {

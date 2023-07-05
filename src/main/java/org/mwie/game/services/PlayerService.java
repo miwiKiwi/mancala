@@ -1,7 +1,7 @@
 package org.mwie.game.services;
 
-import org.mwie.game.board.elements.Pit;
-import org.mwie.game.player.Player;
+import org.mwie.game.model.board.elements.Pit;
+import org.mwie.game.model.player.Player;
 
 public interface PlayerService {
 

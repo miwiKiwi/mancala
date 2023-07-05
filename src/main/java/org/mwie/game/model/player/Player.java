@@ -1,7 +1,7 @@
-package org.mwie.game.player;
+package org.mwie.game.model.player;
 
-import org.mwie.game.board.elements.StandardPit;
-import org.mwie.game.board.elements.Store;
+import org.mwie.game.model.board.elements.StandardPit;
+import org.mwie.game.model.board.elements.Store;
 
 import java.util.List;
 

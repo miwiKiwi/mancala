@@ -1,7 +1,7 @@
-package org.mwie.game.board.elements;
+package org.mwie.game.model.board.elements;
 
-import org.mwie.game.player.Player;
-import org.mwie.game.player.PlayerNumber;
+import org.mwie.game.model.player.Player;
+import org.mwie.game.model.player.PlayerNumber;
 
 public class Store extends Pit {
 

@@ -5,7 +5,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mwie.game.board.Board;
+import org.mwie.game.model.board.Board;
+import org.mwie.game.model.player.Player;
+import org.mwie.game.model.player.PlayerNumber;
 import org.mwie.game.services.PlayerServiceImpl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -22,7 +24,7 @@ class PlayerServiceTest {
 
     @BeforeEach
     void setup() {
-        Board board = new Board.BoardBuilder().create(3, 6).build();
+        Board board = Board.create(3, 6);
         one = board.getPlayers().get(PlayerNumber.ONE);
         two = board.getPlayers().get(PlayerNumber.TWO);
     }

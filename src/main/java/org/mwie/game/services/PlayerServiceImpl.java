@@ -1,10 +1,10 @@
 package org.mwie.game.services;
 
 import lombok.RequiredArgsConstructor;
-import org.mwie.game.board.elements.Pit;
-import org.mwie.game.board.elements.StandardPit;
-import org.mwie.game.board.elements.Store;
-import org.mwie.game.player.Player;
+import org.mwie.game.model.board.elements.Pit;
+import org.mwie.game.model.board.elements.StandardPit;
+import org.mwie.game.model.board.elements.Store;
+import org.mwie.game.model.player.Player;
 
 @RequiredArgsConstructor
 public class PlayerServiceImpl implements PlayerService {

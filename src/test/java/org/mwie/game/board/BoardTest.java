@@ -2,10 +2,11 @@ package org.mwie.game.board;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mwie.game.board.elements.Pit;
-import org.mwie.game.board.elements.StandardPit;
-import org.mwie.game.board.elements.Store;
-import org.mwie.game.player.PlayerNumber;
+import org.mwie.game.model.board.Board;
+import org.mwie.game.model.board.elements.Pit;
+import org.mwie.game.model.board.elements.StandardPit;
+import org.mwie.game.model.board.elements.Store;
+import org.mwie.game.model.player.PlayerNumber;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ class BoardTest {
 
     @BeforeEach
     void setup() {
-        board = new Board.BoardBuilder().create(6, 6).build();
+        board = Board.create(6, 6);
     }
 
     @Test
