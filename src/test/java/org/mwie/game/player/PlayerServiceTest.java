@@ -6,12 +6,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mwie.game.board.Board;
-import org.mwie.game.board.elements.Pit;
-import org.mwie.game.board.elements.StandardPit;
-import org.mwie.game.board.elements.Store;
 import org.mwie.game.services.PlayerServiceImpl;
-
-import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,32 +24,26 @@ class PlayerServiceTest {
 
     @BeforeEach
     void setup() {
-        board = new Board.BoardBuilder().create(6).build();
+        board = new Board.BoardBuilder().create(3, 6).build();
         one = board.getPlayers().get(PlayerNumber.ONE);
         two = board.getPlayers().get(PlayerNumber.TWO);
     }
 
-    private Player setupPlayer(PlayerNumber playerNumber) {
-        StandardPit first = new StandardPit(playerNumber);
-        StandardPit second = new StandardPit(playerNumber);
-        StandardPit third = new StandardPit(playerNumber);
-        StandardPit fourth = new StandardPit(playerNumber);
-        StandardPit fifth = new StandardPit(playerNumber);
-        StandardPit sixth = new StandardPit(playerNumber);
-        Store store = new Store(playerNumber);
-
-        first.setNext(second);
-        second.setNext(third);
-        third.setNext(fourth);
-        fourth.setNext(fifth);
-        fifth.setNext(sixth);
-        sixth.setNext(store);
-
-        return new Player(
-                playerNumber,
-                Arrays.asList(first, second, third, fourth, fifth, sixth),
-                store);
-    }
+//    private Player setupPlayer(PlayerNumber playerNumber) {
+//        StandardPit first = new StandardPit(playerNumber, 6);
+//        StandardPit second = new StandardPit(playerNumber, 6);
+//        StandardPit third = new StandardPit(playerNumber, 6);
+//        Store store = new Store(playerNumber);
+//
+//        first.setNext(second);
+//        second.setNext(third);
+//        third.setNext(store);
+//
+//        return new Player(
+//                playerNumber,
+//                Arrays.asList(first, second, third, fourth, fifth, sixth),
+//                store);
+//    }
 
     @Test
     void shouldBeAbleToMoveStones() {
@@ -62,9 +51,6 @@ class PlayerServiceTest {
         assertEquals(0, one.getStandardPit(1).getStones());
         assertEquals(7, one.getStandardPit(2).getStones());
         assertEquals(7, one.getStandardPit(3).getStones());
-        assertEquals(7, one.getStandardPit(4).getStones());
-        assertEquals(7, one.getStandardPit(5).getStones());
-        assertEquals(7, one.getStandardPit(6).getStones());
         assertEquals(1, one.store().getStones());
     }
 
@@ -78,24 +64,21 @@ class PlayerServiceTest {
 
     @Test
     void shouldSkipOpponentStore() {
-        //TODO: make standard pit take initial number of stones as argument in constructor
-        // and fix tests here
-        playerService.takeTurn(one, 1);
-        playerService.takeTurn(two, 2);
-        playerService.takeTurn(one, 3);
-        Pit result = playerService.takeTurn(one, 6);
+        var result = playerService.takeTurn(one, 3);
+        //Pit result = playerService.takeTurn(one, 3);
 
-        assertEquals(one.getStandardPit(1), result);
-        assertEquals(1, one.getStandardPit(1).getStones());
-        assertEquals(3, one.store().getStones());
+        assertEquals(one.getStandardPit(2), result);
+        assertEquals(7, one.getStandardPit(1).getStones());
+        assertEquals(7, one.getStandardPit(2).getStones());
+        assertEquals(0, one.getStandardPit(3).getStones());
+        assertEquals(1, one.store().getStones());
         assertEquals(0, two.store().getStones());
     }
 
     @Test
     void shouldCaptureStonesFromOppositePit() {
         playerService.takeTurn(one, 1);
-        playerService.takeTurn(one, 2);
-        Pit result = playerService.takeTurn(one, 6);
+        var result = playerService.takeTurn(one, 2);
 
         assertEquals(0, result.getStones());
         assertEquals(11, one.store().getStones());

@@ -50,7 +50,7 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     private void captureStones(Player player, StandardPit pit) {
-        var stones = pit.takeOutStones() + pit.getOpposite().getOpposite().takeOutStones();
+        var stones = pit.takeOutStones() + pit.getOpposite().takeOutStones();
         player.store().putStones(stones);
     }
 }

@@ -1,5 +1,6 @@
 package org.mwie.game.board;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mwie.game.board.elements.Pit;
 import org.mwie.game.board.elements.StandardPit;
@@ -14,9 +15,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
 
+    private Board board;
+
+    @BeforeEach
+    void setup() {
+        board = new Board.BoardBuilder().create(6, 6).build();
+    }
+
     @Test
     void shouldHaveSixPitsPerPlayer() {
-        Board board = new Board.BoardBuilder().create(6).build();
         var pits = board.getPits().stream().collect(Collectors.groupingBy(StandardPit::getOwner));
         assertEquals(6, pits.get(PlayerNumber.ONE).size());
         assertEquals(6, pits.get(PlayerNumber.TWO).size());
@@ -24,7 +31,6 @@ class BoardTest {
 
     @Test
     void shouldHaveOneStorePerPlayer() {
-        Board board = new Board.BoardBuilder().create(6).build();
         var stores = board.getStores().stream().collect(Collectors.groupingBy(Store::getOwner));
         assertEquals(1, stores.get(PlayerNumber.ONE).size());
         assertEquals(1, stores.get(PlayerNumber.TWO).size());
@@ -32,9 +38,8 @@ class BoardTest {
 
     @Test
     void shouldHavePitsInCycle() {
-        Board board = new Board.BoardBuilder().create(6).build();
-        var storeOne = board.getPits().get(0);
-        Pit pit = storeOne;
+        var firstPit = board.getPits().get(0);
+        Pit pit = firstPit;
         Set<Pit> allPits = new HashSet<>();
         allPits.add(pit);
 
@@ -44,12 +49,11 @@ class BoardTest {
         }
 
         assertEquals(14, allPits.size());
-        assertEquals(storeOne, pit);
+        assertEquals(firstPit, pit);
     }
 
     @Test
     void pitsShouldHaveOpposites() {
-        Board board = new Board.BoardBuilder().create(6).build();
         var players = board.getPlayers();
         var pitsOne = players.get(PlayerNumber.ONE).pits();
         var pitsTwo = players.get(PlayerNumber.TWO).pits();

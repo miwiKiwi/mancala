@@ -44,9 +44,9 @@ public class Board {
         private List<Store> stores;
         private Map<PlayerNumber, Player> players;
 
-        public BoardBuilder create(int numberOfPitsPerPlayer) {
-            var pitsOne = buildPitsForPlayer(ONE, numberOfPitsPerPlayer);
-            var pitsTwo = buildPitsForPlayer(TWO, numberOfPitsPerPlayer);
+        public BoardBuilder create(int numberOfPitsPerPlayer, int initialNumberOfStonesInPit) {
+            var pitsOne = buildPitsForPlayer(ONE, numberOfPitsPerPlayer, initialNumberOfStonesInPit );
+            var pitsTwo = buildPitsForPlayer(TWO, numberOfPitsPerPlayer, initialNumberOfStonesInPit);
             pits = new ArrayList<>(pitsOne);
             pits.addAll(pitsTwo);
 
@@ -75,11 +75,12 @@ public class Board {
             }
         }
 
-        private LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int numberOfPitsPerPlayer) {
+        private LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int numberOfPitsPerPlayer,
+                                                           int initialNumberOfStonesInPit) {
             LinkedList<StandardPit> playerPits = new LinkedList<>();
-            var previous = new StandardPit(playerNumber);
+            var previous = new StandardPit(playerNumber, initialNumberOfStonesInPit);
             while(playerPits.size() < numberOfPitsPerPlayer) {
-                var next = new StandardPit(playerNumber);
+                var next = new StandardPit(playerNumber, initialNumberOfStonesInPit);
                 previous.setNext(next);
                 previous = next;
                 playerPits.add(next);

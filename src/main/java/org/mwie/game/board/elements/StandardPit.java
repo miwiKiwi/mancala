@@ -7,8 +7,8 @@ public class StandardPit extends Pit {
 
     private StandardPit opposite;
 
-    public StandardPit(PlayerNumber owner) {
-        super(6, owner);
+    public StandardPit(PlayerNumber owner, int initialNumberOfStones) {
+        super(initialNumberOfStones, owner);
     }
 
     public int takeOutStones() {
