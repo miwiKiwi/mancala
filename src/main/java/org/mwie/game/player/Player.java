@@ -8,6 +8,10 @@ import java.util.List;
 public record Player(PlayerNumber playerNumber, List<StandardPit> pits, Store store) {
 
     public StandardPit getStandardPit(int pitNumber) {
-        return pits.get(pitNumber - 1);
+        try {
+            return pits.get(pitNumber - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("Player must choose pit within bounds");
+        }
     }
 }

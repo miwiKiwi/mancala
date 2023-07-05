@@ -17,33 +17,15 @@ class PlayerServiceTest {
     @InjectMocks
     private PlayerServiceImpl playerService;
 
-    private Board board;
-
     private Player one;
     private Player two;
 
     @BeforeEach
     void setup() {
-        board = new Board.BoardBuilder().create(3, 6).build();
+        Board board = new Board.BoardBuilder().create(3, 6).build();
         one = board.getPlayers().get(PlayerNumber.ONE);
         two = board.getPlayers().get(PlayerNumber.TWO);
     }
-
-//    private Player setupPlayer(PlayerNumber playerNumber) {
-//        StandardPit first = new StandardPit(playerNumber, 6);
-//        StandardPit second = new StandardPit(playerNumber, 6);
-//        StandardPit third = new StandardPit(playerNumber, 6);
-//        Store store = new Store(playerNumber);
-//
-//        first.setNext(second);
-//        second.setNext(third);
-//        third.setNext(store);
-//
-//        return new Player(
-//                playerNumber,
-//                Arrays.asList(first, second, third, fourth, fifth, sixth),
-//                store);
-//    }
 
     @Test
     void shouldBeAbleToMoveStones() {
@@ -57,15 +39,21 @@ class PlayerServiceTest {
     @Test
     void shouldThrowExceptionWhenEmptyPitChosen() {
         playerService.takeTurn(one, 1);
-        assertThrows(IllegalArgumentException.class, () -> {
-            playerService.takeTurn(one, 1);
-        });
+        assertThrows(IllegalArgumentException.class, () ->
+                playerService.takeTurn(one, 1)
+        );
+    }
+
+    @Test
+    void shouldThrowExceptionWhenPitOutOfBoundsChosen() {
+        assertThrows(IllegalArgumentException.class, () ->
+            playerService.takeTurn(one, 4)
+        );
     }
 
     @Test
     void shouldSkipOpponentStore() {
         var result = playerService.takeTurn(one, 3);
-        //Pit result = playerService.takeTurn(one, 3);
 
         assertEquals(one.getStandardPit(2), result);
         assertEquals(7, one.getStandardPit(1).getStones());
