@@ -1,11 +1,11 @@
 package org.mwie.game.services;
 
-import org.mwie.game.model.player.Player;
+import org.mwie.game.model.Game;
 import org.mwie.game.model.player.PlayerNumber;
 
 public interface GameService {
 
-    String createGame();
+    Game createGame();
 
-    Player getPlayer(PlayerNumber playerNumber);
+    Game makeAMove(PlayerNumber playerNumber, int pitIndex);
 }

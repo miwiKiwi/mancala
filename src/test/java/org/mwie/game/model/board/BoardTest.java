@@ -1,8 +1,7 @@
-package org.mwie.game.board;
+package org.mwie.game.model.board;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mwie.game.model.board.Board;
 import org.mwie.game.model.board.elements.Pit;
 import org.mwie.game.model.board.elements.StandardPit;
 import org.mwie.game.model.board.elements.Store;

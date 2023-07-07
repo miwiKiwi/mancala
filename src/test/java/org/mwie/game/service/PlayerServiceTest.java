@@ -1,4 +1,4 @@
-package org.mwie.game.player;
+package org.mwie.game.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

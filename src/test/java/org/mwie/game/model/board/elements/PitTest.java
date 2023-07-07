@@ -1,9 +1,7 @@
-package org.mwie.game.board.elements;
+package org.mwie.game.model.board.elements;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mwie.game.model.board.elements.StandardPit;
-import org.mwie.game.model.board.elements.Store;
 import org.mwie.game.model.player.PlayerNumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

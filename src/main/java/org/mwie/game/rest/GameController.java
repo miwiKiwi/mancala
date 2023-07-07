@@ -1,7 +1,7 @@
 package org.mwie.game.rest;
 
 import lombok.RequiredArgsConstructor;
-import org.mwie.game.model.player.Player;
+import org.mwie.game.model.Game;
 import org.mwie.game.model.player.PlayerNumber;
 import org.mwie.game.services.GameService;
 import org.mwie.game.services.PlayerService;
@@ -16,15 +16,13 @@ public class GameController {
     private final PlayerService playerService;
 
     @PostMapping
-    public String createGame() {
-        //TODO: implement me!
+    public Game createGame() {
         return gameService.createGame();
     }
 
-    @PutMapping("turn/{playerNumber}/pit/{pitNumber}")
+    @PutMapping("/turn/{playerNumber}/pit/{pitNumber}")
     public void takeTurn(@PathVariable PlayerNumber playerNumber, @PathVariable int pitNumber) {
-        Player player = gameService.getPlayer(playerNumber);
-        playerService.takeTurn(player, pitNumber);
+        gameService.makeAMove(playerNumber, pitNumber);
         //TODO: return game state after player's turn
     }
 
