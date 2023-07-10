@@ -6,4 +6,6 @@ import org.mwie.game.model.player.Player;
 public interface PlayerService {
 
     Pit takeTurn(Player player, int pitNumber);
+
+    boolean hasAnyStones(Player player);
 }

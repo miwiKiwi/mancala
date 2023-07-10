@@ -5,7 +5,9 @@ import org.mwie.game.model.player.PlayerNumber;
 
 public interface GameService {
 
-    Game createGame();
+    Game createGame(int pitsPerPlayer, int numberOfStones);
+
+    Game getGame();
 
     Game makeAMove(PlayerNumber playerNumber, int pitIndex);
 }

@@ -18,6 +18,11 @@ public class PlayerServiceImpl implements PlayerService {
         return takeTurn(player, pit);
     }
 
+    @Override
+    public boolean hasAnyStones(Player player) {
+        return player.pits().stream().mapToInt(Pit::getStones).sum() > 0;
+    }
+
     private Pit takeTurn(Player player, StandardPit pit) {
         var seeds = pit.takeOutStones();
         Pit endPit = pit;
@@ -31,9 +36,6 @@ public class PlayerServiceImpl implements PlayerService {
         }
         if (canCaptureStones(player, endPit)) {
             captureStones(player, (StandardPit) endPit);
-        }
-        if (canGoAgain(player, endPit)) {
-            //TODO: another turn
         }
         return endPit;
     }

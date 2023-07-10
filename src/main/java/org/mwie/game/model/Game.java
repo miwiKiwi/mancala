@@ -1,10 +1,12 @@
 package org.mwie.game.model;
 
+import lombok.Getter;
 import org.mwie.game.model.board.Board;
 import org.mwie.game.model.player.PlayerNumber;
 
 import java.util.UUID;
 
+@Getter
 public class Game {
 
     private String id;
@@ -21,29 +23,18 @@ public class Game {
         return game;
     }
 
-    public String getId() {
-        return id;
-    }
-
-    public Board getBoard() {
-        return board;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public PlayerNumber getActivePlayer() {
-        return activePlayer;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public void setActivePlayer(PlayerNumber activePlayer) {
         this.activePlayer = activePlayer;
     }
 
-    private enum Status {
+    public enum Status {
         ACTIVE,
         PLAYER_ONE_WIN,
-        PLAYER_TWO_WIN
+        PLAYER_TWO_WIN,
+        DRAW
     }
 }

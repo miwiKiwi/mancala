@@ -72,7 +72,7 @@ public class Board {
             var next = new StandardPit(playerNumber, initialNumberOfStonesInPit);
             previous.setNext(next);
             previous = next;
-            playerPits.add(next);
+            playerPits.addLast(next);
         }
         return playerPits;
     }

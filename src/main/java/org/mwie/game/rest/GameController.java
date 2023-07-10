@@ -10,28 +10,30 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping
+@RequestMapping("/game")
 public class GameController {
 
     private final GameService gameService;
-    private final GameMapper gameMapper;
 
-    @PostMapping("/game")
+    @PostMapping
     @ResponseBody
     public Game createGame() {
-        return gameService.createGame();
+        return gameService.createGame(6, 6);
     }
 
     @PutMapping("/turn/{playerNumber}/pit/{pitNumber}")
     @ResponseBody
-    public void takeTurn(@PathVariable PlayerNumber playerNumber, @PathVariable int pitNumber) {
-        gameService.makeAMove(playerNumber, pitNumber);
-        //TODO: return game state after player's turn
+    public Game takeTurn(@PathVariable PlayerNumber playerNumber, @PathVariable int pitNumber) {
+        return gameService.makeAMove(playerNumber, pitNumber);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public String welcome(Model model) {
-        model.addAttribute("game", gameMapper.mapResponse(gameService.createGame()));
+        Game game = gameService.getGame();
+        if (game == null) {
+            game = gameService.createGame(6, 6);
+        }
+        model.addAttribute("game", game);
         return "index";
     }
 }
