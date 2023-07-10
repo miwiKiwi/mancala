@@ -3,7 +3,6 @@ package org.mwie.game.services;
 import lombok.RequiredArgsConstructor;
 import org.mwie.game.model.board.elements.Pit;
 import org.mwie.game.model.board.elements.StandardPit;
-import org.mwie.game.model.board.elements.Store;
 import org.mwie.game.model.player.Player;
 
 @RequiredArgsConstructor
@@ -38,11 +37,6 @@ public class PlayerServiceImpl implements PlayerService {
             captureStones(player, (StandardPit) endPit);
         }
         return endPit;
-    }
-
-    private boolean canGoAgain(Player player, Pit endPit) {
-        return endPit instanceof Store
-                && endPit.getOwner().equals(player.playerNumber());
     }
 
     private static boolean canCaptureStones(Player player, Pit endPit) {
