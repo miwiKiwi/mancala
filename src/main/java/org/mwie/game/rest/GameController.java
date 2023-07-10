@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.mwie.game.model.Game;
 import org.mwie.game.model.player.PlayerNumber;
 import org.mwie.game.services.GameService;
-import org.mwie.game.services.PlayerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class GameController {
 
     private final GameService gameService;
-    private final PlayerService playerService;
+    private final GameMapper gameMapper;
 
     @PostMapping("/game")
     @ResponseBody
@@ -32,7 +31,7 @@ public class GameController {
 
     @GetMapping("/")
     public String welcome(Model model) {
-        model.addAttribute("game", gameService.createGame());
+        model.addAttribute("game", gameMapper.mapResponse(gameService.createGame()));
         return "index";
     }
 }

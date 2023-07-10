@@ -11,12 +11,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="player : ${game.board.players}">
-        <td th:text="${player.value.playerNumber}"></td>
-        <td th:text="${player.value.store.stones}"></td>
-            <span th:each="pit: ${player.value.pits}">
-                <td th:text="${pit.stones}"></td>
-            </span>
+    <tr th:object="${game.players['TWO']}">
+        <td th:text="*{playerNumber}"></td>
+        <td th:text="*{store.stones}"></td>
+        <span th:each="pit: *{pits}">
+            <td th:text="${pit.stones}"></td>
+        </span>
+        <td></td>
+    </tr>
+    <tr th:object="${game.players['ONE']}">
+        <td th:text="*{playerNumber}"></td>
+        <td></td>
+        <span th:each="pit: *{pits}">
+            <td th:text="${pit.stones}"></td>
+        </span>
+        <td th:text="*{store.stones}"></td>
     </tr>
     </tbody>
 </table>
