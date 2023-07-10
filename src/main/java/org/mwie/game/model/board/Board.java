@@ -5,26 +5,18 @@ import org.mwie.game.model.board.elements.Store;
 import org.mwie.game.model.player.Player;
 import org.mwie.game.model.player.PlayerNumber;
 
-import java.util.*;
+import java.util.EnumMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 public class Board {
 
     public static final PlayerNumber ONE = PlayerNumber.ONE;
     public static final PlayerNumber TWO = PlayerNumber.TWO;
 
-    private List<StandardPit> pits;
-    private List<Store> stores;
     private Map<PlayerNumber, Player> players;
 
     private Board() {
-    }
-
-    public List<StandardPit> getPits() {
-        return pits;
-    }
-
-    public List<Store> getStores() {
-        return stores;
     }
 
     public Map<PlayerNumber, Player> getPlayers() {
@@ -36,13 +28,9 @@ public class Board {
         Board board = new Board();
         var pitsOne = buildPitsForPlayer(ONE, numberOfPitsPerPlayer, initialNumberOfStonesInPit);
         var pitsTwo = buildPitsForPlayer(TWO, numberOfPitsPerPlayer, initialNumberOfStonesInPit);
-        board.pits = new ArrayList<>(pitsOne);
-        board.pits.addAll(pitsTwo);
 
-        board.stores = new ArrayList<>();
         var storeOne = new Store(ONE);
         var storeTwo = new Store(TWO);
-        board.stores.addAll(Arrays.asList(storeOne, storeTwo));
 
         setupPitsCycle(pitsOne, pitsTwo, storeOne, storeTwo);
         setupOpposites(pitsOne, pitsTwo);
@@ -64,12 +52,12 @@ public class Board {
         }
     }
 
-    private static LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int numberOfPitsPerPlayer,
-                                                              int initialNumberOfStonesInPit) {
+    private static LinkedList<StandardPit> buildPitsForPlayer(PlayerNumber playerNumber, int pitsPerPlayer, int stonesPerPit) {
         LinkedList<StandardPit> playerPits = new LinkedList<>();
-        var previous = new StandardPit(playerNumber, initialNumberOfStonesInPit);
-        while (playerPits.size() < numberOfPitsPerPlayer) {
-            var next = new StandardPit(playerNumber, initialNumberOfStonesInPit);
+        var previous = new StandardPit(playerNumber, stonesPerPit);
+
+        while (playerPits.size() < pitsPerPlayer) {
+            var next = new StandardPit(playerNumber, stonesPerPit);
             previous.setNext(next);
             previous = next;
             playerPits.addLast(next);

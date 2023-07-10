@@ -3,42 +3,36 @@ package org.mwie.game.model.board;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mwie.game.model.board.elements.Pit;
-import org.mwie.game.model.board.elements.StandardPit;
-import org.mwie.game.model.board.elements.Store;
+import org.mwie.game.model.player.Player;
 import org.mwie.game.model.player.PlayerNumber;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoardTest {
 
     private Board board;
+    private Map<PlayerNumber, Player> players;
 
     @BeforeEach
     void setup() {
         board = Board.create(6, 6);
+        players = board.getPlayers();
     }
 
     @Test
     void shouldHaveSixPitsPerPlayer() {
-        var pits = board.getPits().stream().collect(Collectors.groupingBy(StandardPit::getOwner));
-        assertEquals(6, pits.get(PlayerNumber.ONE).size());
-        assertEquals(6, pits.get(PlayerNumber.TWO).size());
-    }
-
-    @Test
-    void shouldHaveOneStorePerPlayer() {
-        var stores = board.getStores().stream().collect(Collectors.groupingBy(Store::getOwner));
-        assertEquals(1, stores.get(PlayerNumber.ONE).size());
-        assertEquals(1, stores.get(PlayerNumber.TWO).size());
+        Map<PlayerNumber, Player> players = board.getPlayers();
+        assertEquals(6, players.get(PlayerNumber.ONE).pits().size());
+        assertEquals(6, players.get(PlayerNumber.TWO).pits().size());
     }
 
     @Test
     void shouldHavePitsInCycle() {
-        var firstPit = board.getPits().get(0);
+        var firstPit = board.getPlayers().get(PlayerNumber.ONE).pits().get(0);
         Pit pit = firstPit;
         Set<Pit> allPits = new HashSet<>();
         allPits.add(pit);
@@ -54,7 +48,6 @@ class BoardTest {
 
     @Test
     void pitsShouldHaveOpposites() {
-        var players = board.getPlayers();
         var pitsOne = players.get(PlayerNumber.ONE).pits();
         var pitsTwo = players.get(PlayerNumber.TWO).pits();
 

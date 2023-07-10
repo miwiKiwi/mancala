@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/game")
+@RequestMapping
 public class GameController {
 
     private final GameService gameService;
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseBody
     public Game createGame() {
         return gameService.createGame(6, 6);

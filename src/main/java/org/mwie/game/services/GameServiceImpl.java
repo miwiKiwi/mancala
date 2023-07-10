@@ -56,9 +56,7 @@ public class GameServiceImpl implements GameService {
     }
 
     private void setActivePlayer(Pit landed) {
-        if (finishedInStore(landed)) {
-            game.setActivePlayer(game.getActivePlayer());
-        } else {
+        if (!finishedInStore(landed)) {
             switch (game.getActivePlayer()) {
                 case ONE -> game.setActivePlayer(TWO);
                 case TWO -> game.setActivePlayer(ONE);
@@ -68,6 +66,15 @@ public class GameServiceImpl implements GameService {
 
     private boolean finishedInStore(Pit landed) {
         return landed instanceof Store && landed.getOwner().equals(game.getActivePlayer());
+    }
+
+    private void moveStonesToStores() {
+        game.getBoard().getPlayers().forEach((number, player) ->
+                player.pits().forEach(pit -> {
+                    int stones = pit.takeOutStones();
+                    player.store().putStones(stones);
+                })
+        );
     }
 
     private void declareWinner() {
@@ -80,15 +87,6 @@ public class GameServiceImpl implements GameService {
         } else {
             game.setStatus(Game.Status.PLAYER_TWO_WIN);
         }
-    }
-
-    private void moveStonesToStores() {
-        game.getBoard().getPlayers().forEach((number, player) ->
-            player.pits().forEach(pit -> {
-                int stones = pit.takeOutStones();
-                player.store().putStones(stones);
-            })
-        );
     }
 
     private boolean gameIsFinished() {

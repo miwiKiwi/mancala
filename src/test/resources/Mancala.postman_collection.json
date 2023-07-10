@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "f4822e48-8790-42d0-b83d-ee6b495f43bc",
+		"name": "Mancala",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4151424"
+	},
+	"item": [
+		{
+			"name": "game",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/create",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "take turn",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/turn/ONE/pit/2",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"turn",
+						"ONE",
+						"pit",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

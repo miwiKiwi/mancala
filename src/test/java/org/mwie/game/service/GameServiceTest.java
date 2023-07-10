@@ -48,10 +48,10 @@ class GameServiceTest {
 
     @Test
     void shouldEndGameWhenPlayerHasNoStones() {
+        gameService.createGame(2, 1);
         when(playerService.hasAnyStones(gameService.getGame().getBoard().getPlayers().get(PlayerNumber.ONE)))
                 .thenReturn(false);
 
-        gameService.createGame(2, 1);
         gameService.makeAMove(PlayerNumber.ONE, 1);
 
         assertEquals(Game.Status.DRAW, gameService.getGame().getStatus());
