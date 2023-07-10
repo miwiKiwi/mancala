@@ -36,17 +36,15 @@ public class GameServiceImpl implements GameService {
     }
 
     private boolean canTakeTurn(PlayerNumber playerNumber) {
-        var player = game.getBoard().getPlayers().get(playerNumber);
         var activePlayer = game.getActivePlayer();
-        return player.equals(activePlayer);
+        return activePlayer.equals(playerNumber);
     }
 
     public void finishTurn() {
-        var players = game.getBoard().getPlayers();
         //TODO: check for end game conditions
-        switch (game.getActivePlayer().playerNumber()) {
-            case ONE -> game.setActivePlayer(players.get(TWO));
-            case TWO -> game.setActivePlayer(players.get(ONE));
+        switch (game.getActivePlayer()) {
+            case ONE -> game.setActivePlayer(TWO);
+            case TWO -> game.setActivePlayer(ONE);
         }
     }
 

@@ -1,7 +1,6 @@
 package org.mwie.game.model;
 
 import org.mwie.game.model.board.Board;
-import org.mwie.game.model.player.Player;
 import org.mwie.game.model.player.PlayerNumber;
 
 import java.util.UUID;
@@ -11,13 +10,13 @@ public class Game {
     private String id;
     private Board board;
     private Status status;
-    private Player activePlayer;
+    private PlayerNumber activePlayer;
 
     public static Game create(Board board) {
         Game game = new Game();
         game.id = UUID.randomUUID().toString();
         game.board = board;
-        game.activePlayer = board.getPlayers().get(PlayerNumber.ONE);
+        game.activePlayer = PlayerNumber.ONE;
         game.status = Status.ACTIVE;
         return game;
     }
@@ -34,11 +33,11 @@ public class Game {
         return status;
     }
 
-    public Player getActivePlayer() {
+    public PlayerNumber getActivePlayer() {
         return activePlayer;
     }
 
-    public void setActivePlayer(Player activePlayer) {
+    public void setActivePlayer(PlayerNumber activePlayer) {
         this.activePlayer = activePlayer;
     }
 

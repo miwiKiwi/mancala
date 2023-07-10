@@ -1,10 +1,12 @@
 package org.mwie.game.model.board.elements;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.mwie.game.model.player.Player;
 import org.mwie.game.model.player.PlayerNumber;
 
 public class StandardPit extends Pit {
 
+    @JsonIgnore
     private StandardPit opposite;
 
     public StandardPit(PlayerNumber owner, int initialNumberOfStones) {

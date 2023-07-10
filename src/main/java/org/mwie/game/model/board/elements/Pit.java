@@ -1,5 +1,6 @@
 package org.mwie.game.model.board.elements;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.mwie.game.model.player.Player;
 import org.mwie.game.model.player.PlayerNumber;
 
@@ -9,6 +10,7 @@ public abstract class Pit {
 
     private final PlayerNumber owner;
 
+    @JsonIgnore
     private Pit next;
 
     protected Pit(int stones, PlayerNumber owner) {
